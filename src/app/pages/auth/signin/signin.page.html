@@ -1,0 +1,78 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar #toolbar>
+    <ion-buttons sort="start" mode="ios">
+      <ion-button color="primary" (click)="close()">
+        <ion-icon slot="icon-only" name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end" *ngIf="openedByOtherPage">
+      <ion-button shape="round" color="primary" (click)="goToRegister()">
+        Crear Cuenta
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content scroll-y="false">
+  
+  <div class="main__wrapper">
+
+    <div class="title">
+      <h1>Iniciar Sesión</h1>
+      <p>Accede a tu cuenta para ver tus animes agregados y utilizar todas las funciones</p>
+    </div>
+
+    <div class="card">
+
+      <form [formGroup]="formLogin" (ngSubmit)="login()">
+  
+        <ion-item fill="outline">
+          <ion-label position="floating">Usuario o Email</ion-label>
+          <ion-icon slot="start" name="mail-outline"></ion-icon>
+          <ion-input formControlName="email"></ion-input>
+        </ion-item>
+      
+        <ion-item fill="outline">
+          <ion-label position="floating">Contraseña</ion-label>
+          <ion-icon slot="start" name="lock-closed-outline"></ion-icon>
+          <ion-input formControlName="password" type="password"></ion-input>
+        </ion-item>
+
+        <div class="hyperlinks">
+          <ion-button fill="clear" (click)="forgotAccount()" disabled>Recuperar cuenta</ion-button>
+        </div>
+
+        <ion-button [disabled]="!formLogin.valid" expand="block"  shape="round" class="login yellowButton" type="submit">Iniciar Sesión</ion-button>
+
+        <div class="division" *ngIf="userHasBiometricCredentials">
+          <div class="hr"></div>
+          <p>o</p>
+          <div class="hr"></div>
+        </div>
+
+        <ion-button *ngIf="userHasBiometricCredentials" class="biometricBtn" expand="block"  shape="round" (click)="biometricLogin()">
+          <ion-icon slot="start" name="finger-print-outline"></ion-icon>
+          <ion-label>Acceder con Biometría</ion-label>
+        </ion-button>
+
+        <!-- <ion-button class="googleBtn" expand="block"  shape="round" (click)="googleLogin()">
+          <ion-thumbnail slot="start">
+            <img style="background-color: unset;" src="assets/icon/google_logo.png">
+          </ion-thumbnail>
+          <ion-label>Acceder con Google</ion-label>
+        </ion-button> -->
+    
+      </form>
+
+      <!-- <div class="disclaimer">
+        <p>Al iniciar sesión, aceptas nuestros <a (click)="utils.openSimpleUrl('https://dangoanime.com/condiciones-del-servicio/')">Términos y Condiciones</a> y <a (click)="utils.openSimpleUrl('https://dangoanime.com/politica-de-privacidad/')">Política de Privacidad</a>.</p>
+      </div> -->
+
+      <!-- <div class="logo_bottom">
+        <img src="assets/icon/dangoanime-icon.png" alt="logo">
+      </div> -->
+    </div>
+
+  </div>
+</ion-content>

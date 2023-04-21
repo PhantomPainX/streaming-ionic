@@ -1,0 +1,11 @@
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+ion-card {
+    border-radius: 10px;
+    --border-radius: 10px;
+}

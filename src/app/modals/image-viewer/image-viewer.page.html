@@ -1,0 +1,44 @@
+<ion-header #header mode="ios" translucent>
+  <ion-toolbar #toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="primary" (click)="close()">
+        <ion-icon slot="icon-only" name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{ title }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content scroll-y="false" fullscreen>
+
+  <ion-slides [options]="sliderOpts" #slides style="height:100%" *ngIf="mode == 'jikan'">
+    <ion-slide *ngFor="let picture of pictures">
+      <img class="animate__animated animate__fadeIn animate__faster" [src]="picture.jpg.large_image_url">
+    </ion-slide>
+  </ion-slides>
+
+  <ion-slides [options]="sliderOpts" #slides style="height:100%" *ngIf="mode == 'normal'">
+    <ion-slide *ngFor="let picture of pictures">
+      <img class="animate__animated animate__fadeIn animate__faster" [src]="picture">
+    </ion-slide>
+  </ion-slides>
+
+  <!-- <ion-fab vertical="bottom" horizontal="end" slot="fixed" activated="true" >
+    <ion-fab-button class="add-fab">
+      <ion-icon name="add" size="large"></ion-icon>
+    </ion-fab-button>
+
+    <ion-fab-list side="top">
+      <ion-fab-button class="instagram-fab" (click)="shareInstagram()">
+        <ion-icon name="logo-instagram" size="large"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button class="download-fab" (click)="download()">
+        <ion-icon name="ios-arrow-round-down" size="large"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button class="share-fab" (click)="share()">
+        <ion-icon name="md-share" size="large"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab> -->
+  
+</ion-content>

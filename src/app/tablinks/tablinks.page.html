@@ -1,0 +1,37 @@
+<ion-tabs mode="ios">
+
+  <ion-tab-bar slot="bottom">
+
+    <!-- <ion-tab-button tab="admin" *ngIf="isLogged && is_staff">
+      <ion-icon name="code-slash-outline"></ion-icon>
+      <ion-label>Admin</ion-label>
+    </ion-tab-button> -->
+
+    <ion-tab-button tab="home">
+      <ion-icon name="home"></ion-icon>
+      <ion-label>Inicio</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="favorites" *ngIf="isLogged">
+      <ion-icon name="heart"></ion-icon>
+      <ion-label>Favoritos</ion-label>
+    </ion-tab-button>
+
+    <!-- <ion-tab-button tab="discover">
+      <ion-icon name="compass-outline"></ion-icon>
+      <ion-label>Descubrir</ion-label>
+    </ion-tab-button> -->
+
+    <ion-tab-button tab="social-comments">
+      <ion-icon name="chatbox-ellipses"></ion-icon>
+      <ion-label>Social</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="directorio">
+      <ion-icon name="search"></ion-icon>
+      <ion-label>Buscar</ion-label>
+    </ion-tab-button>
+    
+  </ion-tab-bar>
+
+</ion-tabs>

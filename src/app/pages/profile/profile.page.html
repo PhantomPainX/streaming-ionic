@@ -1,0 +1,106 @@
+<ion-header>
+
+  <div class="red-background">
+
+    <ion-toolbar class="top-toolbar">
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/tablinks/home"></ion-back-button>
+      </ion-buttons>
+      <ion-title>Perfil</ion-title>
+
+      <ion-buttons slot="end">
+        <ion-button (click)="openBlockedUsers()">
+          <ion-icon slot="icon-only" name="person-remove-outline"></ion-icon>
+        </ion-button>
+        <ion-button (click)="requestSyncUser()">
+          <ion-icon slot="icon-only" name="sync-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+
+    <div class="info">
+      <ion-avatar class="avatar">
+        <img src="{{ image }}">
+        <label for="imageSelector">
+          <ion-icon name="pencil-outline"></ion-icon>
+        </label>
+      </ion-avatar>
+
+      <!-- html image input -->
+      <input type="file" id="imageSelector" accept="image/*" (change)="onImageSelected($event)" hidden>
+
+      <h1 class="name">{{ user?.username }}</h1>
+      <p class="title" *ngIf="user?.is_superuser">Super Admin</p>
+      <p class="title" *ngIf="user?.is_staff && !user?.is_superuser">Administrador</p>
+      <p class="title" *ngIf="user?.groups.vip && !user.is_staff && !user.groups.moderator && !user?.is_superuser">VIP</p>
+      <p class="title" *ngIf="user?.groups.moderator && !user?.is_staff && !user?.is_superuser">Moderador</p>
+      <p class="title" *ngIf="!user?.is_staff && !user?.is_superuser && !user?.groups.vip && !user?.groups.moderator">Miembro</p>
+    </div>
+
+    <ion-toolbar class="blur">
+      <ion-segment [ngModel]="segment" (ionChange)="segmentChanged($event)">
+        <ion-segment-button value="about">
+          <ion-label>Información</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </ion-toolbar>
+  </div>
+
+</ion-header>
+
+<ion-content>
+  <ion-grid *ngIf="segment === 'about'">
+    <ion-row>
+      <ion-col size="12">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Información</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <form [formGroup]="formProfile" (ngSubmit)="editProfile()">
+              <ion-list>
+                <ion-item fill="outline" [disabled]="!editingProfile">
+                  <ion-label position="floating">Usuario</ion-label>
+                  <ion-input formControlName="username" type="text"></ion-input>
+                </ion-item>
+                <ion-item fill="outline" [disabled]="!editingProfile">
+                  <ion-label position="floating">Nombres</ion-label>
+                  <ion-input formControlName="first_name" type="text"></ion-input>
+                </ion-item>
+                <ion-item fill="outline" [disabled]="!editingProfile">
+                  <ion-label position="floating">Apellidos</ion-label>
+                  <ion-input formControlName="last_name" type="text"></ion-input>
+                </ion-item>
+                <ion-item fill="outline" [disabled]="!editingProfile">
+                  <ion-label position="floating">Email</ion-label>
+                  <ion-input formControlName="email" type="email"></ion-input>
+                </ion-item>
+              </ion-list>
+              <ion-button style="margin-bottom: 10px" *ngIf="editingProfile" type="submit" expand="block" shape="round" color="primary" [disabled]="!formProfile.valid">
+                <ion-icon slot="start" name="save-outline"></ion-icon>
+                Guardar
+              </ion-button>
+            </form>
+
+            <ion-button expand="block" shape="round" color="primary" (click)="allowEditProfile()" *ngIf="!editingProfile">
+              <ion-icon slot="start" name="create-outline"></ion-icon>
+              Editar perfil
+            </ion-button>
+            <ion-button class="cancelBtn" expand="block" shape="round" (click)="disallowEditProfile()" *ngIf="editingProfile">
+              <ion-icon slot="start" name="close-outline"></ion-icon>
+              Cancelar
+            </ion-button>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="12">
+        <ion-button class="cancelBtnClear" expand="block" fill="clear" shape="round" (click)="startAccDeletion()">
+          Eliminar cuenta
+        </ion-button>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

@@ -1,0 +1,95 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar #toolbar>
+    <ion-buttons slot="start" mode="ios">
+      <ion-button color="primary" (click)="goBack()">
+        <ion-icon slot="icon-only" name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="main__wrapper">
+
+    <div class="title">
+      <h1>¡Únetenos!</h1>
+      <p>Con tu cuenta podrás ver todos los videos, guardar animes favoritos y llevar seguimiento de episodios vistos</p>
+    </div>
+
+    <div class="card">
+
+      <div class="avatar">
+        <ion-avatar class="avatar">
+          <img [src]="imageBuffer">
+          <label for="imageSelector">
+            <ion-icon name="pencil-outline"></ion-icon>
+          </label>
+        </ion-avatar>
+      </div>
+
+      <!-- html image input -->
+      <input type="file" id="imageSelector" accept="image/*" (change)="onImageSelected($event)" hidden>
+
+      <form [formGroup]="formRegister" (ngSubmit)="register()">
+
+        <ion-item fill="outline" counter="true">
+          <ion-label position="floating">Nombre de usuario</ion-label>
+          <ion-icon slot="start" name="person-outline"></ion-icon>
+          <ion-input maxlength="20" formControlName="username"></ion-input>
+          <ion-note slot="helper">Solo letras y numeros</ion-note>
+        </ion-item>
+
+        <ion-item fill="outline" counter="true">
+          <ion-label position="floating">Nombres</ion-label>
+          <ion-icon slot="start" name="person-outline"></ion-icon>
+          <ion-input maxlength="30" formControlName="first_name"></ion-input>
+          <ion-note slot="helper">Solo letras, no es requerido</ion-note>
+        </ion-item>
+
+        <ion-item fill="outline" counter="true">
+          <ion-label position="floating">Apellidos</ion-label>
+          <ion-icon slot="start" name="person-outline"></ion-icon>
+          <ion-input maxlength="30" formControlName="last_name"></ion-input>
+          <ion-note slot="helper">Solo letras, no es requerido</ion-note>
+        </ion-item>
+  
+        <ion-item fill="outline">
+          <ion-label position="floating">Correo Electrónico</ion-label>
+          <ion-icon slot="start" name="mail-outline"></ion-icon>
+          <ion-input formControlName="email" type="email"></ion-input>
+        </ion-item>
+      
+        <ion-item fill="outline">
+          <ion-label position="floating">Contraseña</ion-label>
+          <ion-icon slot="start" name="lock-closed-outline"></ion-icon>
+          <ion-input formControlName="password" type="password"></ion-input>
+        </ion-item>
+
+        <ion-item fill="outline">
+          <ion-label position="floating">Confirmar Contraseña</ion-label>
+          <ion-icon slot="start" name="lock-closed-outline"></ion-icon>
+          <ion-input formControlName="passwordConfirm" type="password"></ion-input>
+        </ion-item>
+
+        <ion-item lines="none" class="coppa-item" style="margin-bottom: 0;">
+          <ion-checkbox formControlName="coppa" slot="start"></ion-checkbox>
+          <ion-label>Confirmo que tengo 13 años o más.</ion-label>
+        </ion-item>
+
+        <ion-item lines="none" class="coppa-item">
+          <ion-checkbox formControlName="terms" slot="start"></ion-checkbox>
+          <ion-label style="white-space: unset;">Aceptas nuestros <a (click)="utils.openSimpleUrl('https://google.com')">Términos y Condiciones</a> y <a (click)="utils.openSimpleUrl('https://google.com')">Política de Privacidad</a>.</ion-label>
+        </ion-item>
+
+        <ion-button [disabled]="!formRegister.valid" shape="round" expand="block" class="register" type="submit">Crear Cuenta</ion-button>
+      </form>
+
+      <!-- <div class="logo_bottom">
+        <img src="assets/icon/dangoanime-icon.png" alt="logo">
+      </div> -->
+    </div>
+
+  </div>
+
+</ion-content>
